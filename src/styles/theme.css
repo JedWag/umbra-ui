@@ -27,6 +27,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --radius: 0.5rem;
+  --background: #fff;
+  --foreground: lab(15.7118% 0.831872 -2.88485);
+  --card: #fff;
+  --card-foreground: lab(15.7118% 0.831872 -2.88485);
+  --popover: #fff;
+  --popover-foreground: lab(15.7118% 0.831872 -2.88485);
+  --primary: lab(2.51549% 0.19104 -0.702733);
+  --primary-foreground: #fff;
+  --secondary: lab(84.966% 0.806063 -2.9036);
+  --secondary-foreground: lab(15.7118% 0.831872 -2.88485);
+  --muted: lab(96.52% -0.0000298023 0.0000119209);
+  --muted-foreground: lab(48.496% 0 0);
+  --accent: lab(90.6739% 0.53075 -1.9261);
+  --accent-foreground: lab(15.7118% 0.831872 -2.88485);
+  --destructive: lab(48.4493% 77.4328 61.5452);
+  --border: lab(90.6739% 0.53075 -1.9261);
+  --input: lab(84.966% 0.806063 -2.9036);
+  --ring: lab(15.7118% 0.831872 -2.88485);
+  --chart-1: lab(2.51549% 0.19104 -0.702733);
+  --chart-2: lab(35.1389% 1.52317 -5.29942);
+  --chart-3: lab(15.7118% 0.831872 -2.88485);
+  --chart-4: lab(65.6739% 1.21629 -4.34661);
+  --chart-5: lab(84.966% 0.806063 -2.9036);
+  --sidebar: lab(96.1486% 0.269413 -0.982153);
+  --sidebar-foreground: lab(47.8878% 1.65495 -5.77277);
+  --sidebar-primary: lab(2.51549% 0.19104 -0.702733);
+  --sidebar-primary-foreground: #fff;
+  --sidebar-accent: lab(90.6739% 0.53075 -1.9261);
+  --sidebar-accent-foreground: lab(2.51549% 0.19104 -0.702733);
+  --sidebar-border: lab(90.6739% 0.53075 -1.9261);
+  --sidebar-ring: lab(15.7118% 0.831872 -2.88485);
+
+  --status-blue-border: #2f6fd9;
+  --status-blue-bg: oklab(0.378993 -0.0114082 -0.145541 / 0.12);
+  --status-green-border: #1f9a4a;
+  --status-green-bg: oklab(0.392999 -0.0842891 0.0438199 / 0.12);
+  --status-orange-border: #d9791f;
+  --status-orange-bg: oklab(0.408004 0.0966848 0.0760221 / 0.12);
+  --status-red-border: #e40014;
+  --status-red-bg: oklab(0.393332 0.1166208 0.0489691 / 0.12);
+}
+
 .dark {
   --background: lab(2.51549% 0.19104 -0.702733);
   --foreground: lab(90.6739% 0.53075 -1.9261);
