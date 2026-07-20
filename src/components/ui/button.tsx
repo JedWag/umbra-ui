@@ -57,4 +57,16 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+// Icon-only button preset: bakes in variant="ghost" size="icon" (the pairing used at every
+// icon-only button site - topbar actions, calendar/list nav arrows) so apps never set either.
+function IconButton({
+  className,
+  ...props
+}: Omit<ButtonPrimitive.Props, "children"> & {
+  "aria-label": string
+  children: React.ReactNode
+}) {
+  return <Button variant="ghost" size="icon" className={className} {...props} />
+}
+
+export { Button, buttonVariants, IconButton }
