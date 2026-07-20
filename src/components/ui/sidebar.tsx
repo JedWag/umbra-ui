@@ -550,6 +550,25 @@ function SidebarMenuButton({
   )
 }
 
+// Primary nav item preset: bakes in the kit's nav-item sizing (size="lg", size-6 icons) so
+// consuming apps never choose it themselves - use this for top-level sidebar nav links instead
+// of configuring SidebarMenuButton by hand.
+function SidebarNavButton({
+  icon: Icon,
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof SidebarMenuButton> & {
+  icon: React.ComponentType<{ className?: string }>
+}) {
+  return (
+    <SidebarMenuButton size="lg" className={className} {...props}>
+      <Icon className="size-6" />
+      <span>{children}</span>
+    </SidebarMenuButton>
+  )
+}
+
 function SidebarMenuAction({
   className,
   render,
@@ -711,6 +730,7 @@ export {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarNavButton,
   SidebarMenuSkeleton,
   SidebarMenuSub,
   SidebarMenuSubButton,

@@ -121,6 +121,34 @@ function DialogFooter({
   )
 }
 
+// Cancel/Save footer preset: bakes in split layout + the cancel/save color pairing so consuming
+// apps never assemble this by hand - use this instead of a bare DialogFooter for any dialog with
+// a discard-vs-commit pair of actions.
+function DialogActions({
+  onCancel,
+  onSave,
+  cancelLabel = "Cancel",
+  saveLabel = "Save",
+  saveDisabled = false,
+}: {
+  onCancel: () => void
+  onSave: () => void
+  cancelLabel?: string
+  saveLabel?: string
+  saveDisabled?: boolean
+}) {
+  return (
+    <DialogFooter split>
+      <Button variant="cancel" onClick={onCancel}>
+        {cancelLabel}
+      </Button>
+      <Button variant="save" onClick={onSave} disabled={saveDisabled}>
+        {saveLabel}
+      </Button>
+    </DialogFooter>
+  )
+}
+
 function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
@@ -152,6 +180,7 @@ function DialogDescription({
 
 export {
   Dialog,
+  DialogActions,
   DialogClose,
   DialogContent,
   DialogDescription,

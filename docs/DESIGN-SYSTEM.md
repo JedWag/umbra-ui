@@ -293,11 +293,12 @@ specifically — it's what makes Cancel read as a real, differentiated choice ne
 rather than a plain gray "close" button. Regular in-page actions (e.g. "Generate Report",
 "Add location") stay on the plain `default` variant.
 
-**Positioning**: pass `split` to `DialogFooter` — `<DialogFooter split>` — to place Cancel on
-the left and Save on the right (`sm:justify-between` instead of the default `sm:justify-end`
-that clusters both on the right). Cancel renders first, Save renders last. This is the built-in
-layout for the pairing above; consuming apps should use `split` rather than overriding
-`className` per dialog.
+**Consuming this pairing**: use `<DialogActions onCancel={...} onSave={...} />` instead of
+assembling `DialogFooter` + two `Button`s by hand — it bakes in `split` positioning (Cancel left,
+Save right, via `sm:justify-between`) and the cancel/save variant colors above, so consuming apps
+never repeat that assembly. Optional `cancelLabel`/`saveLabel`/`saveDisabled` props cover the
+common variations. `DialogFooter`'s raw `split` prop still exists for footers that don't fit this
+exact two-button shape.
 
 ## Table
 
@@ -381,9 +382,10 @@ from scratch, scaffold it with the `shadcn` CLI.
   into a narrower column, it becomes an overlay.
 - **Toggle**: `<SidebarTrigger />` button in the topbar, plus the `Cmd/Ctrl+B` keyboard
   shortcut, both wired up by the block itself.
-- **Nav items** use `<SidebarMenuButton size="lg">` (`h-12 text-lg`) with `size-6` icons — sized
-  up from the button defaults so primary nav reads as visually distinct from body text, not the
-  same scale as form labels.
+- **Nav items** use `<SidebarNavButton icon={...}>Label</SidebarNavButton>`, not a hand-configured
+  `SidebarMenuButton` — it bakes in `size="lg"` (`h-12 text-lg`) and `size-6` icons so consuming
+  apps never choose or repeat that sizing themselves. Sized up from the button defaults so
+  primary nav reads as visually distinct from body text, not the same scale as form labels.
 
 ### The rounded-corner "floating panel" look around the topbar
 
