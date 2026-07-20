@@ -22,7 +22,7 @@ checked out at that exact location; it breaks for anyone else and for CI. From t
 project:
 
 ```
-npm install git+ssh://git@github.com/JedWag/ui-kit-shadcn.git
+npm install git+https://github.com/JedWag/ui-kit-shadcn.git
 ```
 
 npm clones the repo and installs it into `node_modules` as a real copy — not a symlink, so
