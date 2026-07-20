@@ -1,8 +1,18 @@
 # ui-kit-shadcn
 
-Portable dark-dashboard design system: theme tokens (colors, type scale, spacing, radius) plus
-a set of shadcn-style React components (`Button`, `Card`, `Table`, `Dialog`, `Tabs`, `Sidebar`,
-etc.), built on `@base-ui/react` and Tailwind CSS 4.
+## Goal
+
+One shared repo, installed as a real dependency by every personal app (qb, guzzler, future
+ones), so the entire visual and structural language lives in exactly one place: theme
+(colors/type scale/spacing/radius), components (`Button`, `Card`, `Table`, `Dialog`, `Sidebar`,
+etc.), **and shared structural patterns** — the app shell (sidebar + header layout), the
+settings-dialog layout, and anything else that would otherwise get re-derived or copy-pasted
+per app. Fix or improve something once, here, and every app that depends on it picks it up.
+This is **not** a components-only library — it's the shared framework/rules layer for every app
+that uses it, so treat "does this belong in the kit?" as "would every app want this to look/work
+the same way?", not "is this a generic enough React component?".
+
+Built on `@base-ui/react` and Tailwind CSS 4.
 
 This is meant to be **installed as a dependency in each project, not copy-pasted**. That's the
 whole point: code that lives in `node_modules` is naturally hands-off, because the next
@@ -102,7 +112,8 @@ Then add the new file to `src/index.ts`'s exports.
 
 ## What's deliberately *not* in this kit
 
-App-specific things stay in the consuming project, not here: page layouts, entity-specific
-dialogs (e.g. an "Employee" form), API clients, routing, branding/logo. This kit only ships the
-generic design-system layer — the pieces that should look identical across every project that
-uses it.
+App-specific things stay in the consuming project, not here: *content* of pages, entity-specific
+dialogs (e.g. an "Employee" form), API clients, routing, branding/logo image itself. Shared
+*structure* — the app shell layout, the settings-dialog layout, and anything else every app
+should look/behave the same way for — belongs in the kit (see Goal above), not copy-pasted per
+app.

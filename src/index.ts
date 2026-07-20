@@ -1,6 +1,7 @@
 export * from "./lib/utils"
 export * from "./lib/theme-provider"
 export * from "./components/theme-toggle"
+export * from "./components/app-shell"
 
 export * from "./components/ui/badge"
 export * from "./components/ui/button"
