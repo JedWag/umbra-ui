@@ -12,6 +12,12 @@
  * in that project's own CSS, layered after this import.
  */
 
+/* Tailwind v4's automatic content detection skips node_modules, so a consuming
+   project would never generate the utility classes used inside this kit's own
+   component source. This tells it to scan them anyway, wherever this package
+   ends up installed. */
+@source "../**/*.{ts,tsx}";
+
 @import "@fontsource/outfit/400.css";
 @import "@fontsource/outfit/500.css";
 @import "@fontsource/outfit/600.css";

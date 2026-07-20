@@ -16,19 +16,24 @@ copy values out of by hand.
 
 ## Installing in a project
 
-From the consuming project:
+This repo is public on GitHub (`github.com/JedWag/ui-kit-shadcn`) — **install from there, not
+from a local path.** A local `file:` path only resolves on the one machine that has this repo
+checked out at that exact location; it breaks for anyone else and for CI. From the consuming
+project:
 
 ```
-npm install ~/Github/ui-kit-shadcn
+npm install git+ssh://git@github.com/JedWag/ui-kit-shadcn.git
 ```
 
-(or, once this repo has a remote: `npm install git+ssh://git@github.com/<you>/ui-kit-shadcn.git`)
+npm clones the repo and installs it into `node_modules` as a real copy — not a symlink, so
+editing the installed copy won't touch this repo and won't survive a reinstall, which is exactly
+the boundary you want. It also means a plain `npm install` never picks up new commits on its
+own — after pushing a change here, bump the dependency (or just delete
+`node_modules/ui-kit-shadcn` and reinstall) in each consuming project to pick it up.
 
-This adds a `file:` — or git — dependency, which npm installs into `node_modules` as a real
-copy. It is **not** a symlink into this repo, so editing the installed copy won't touch this
-repo and won't survive a reinstall — which is exactly the boundary you want.
-
-To pick up changes after editing this repo, re-run `npm install` in the consuming project.
+(A local `file:../path/to/ui-kit-shadcn` install still works during active same-day development
+on both the kit and a consumer at once, but treat it as temporary — switch back to the git URL
+before committing.)
 
 ## Using it
 
@@ -41,8 +46,8 @@ To pick up changes after editing this repo, re-run `npm install` in the consumin
 @import "ui-kit-shadcn/theme.css";
 ```
 
-Light mode is left as shadcn's stock neutrals (`shadcn/tailwind.css` already provides it) —
-this kit only overrides `.dark`.
+Ships a real light palette and a real dark palette, both extracted from the reference
+dashboard's `default` theme preset — not shadcn's stock neutrals.
 
 **2. Wrap your app in the theme provider:**
 

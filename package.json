@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Portable dark-dashboard design system (theme + shadcn-style components) — drop into a project as a dependency, don't edit in place.",
+  "files": [
+    "src",
+    "README.md"
+  ],
   "main": "src/index.ts",
   "types": "src/index.ts",
   "exports": {

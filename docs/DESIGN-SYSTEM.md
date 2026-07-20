@@ -209,8 +209,9 @@ Raw base ramp (for anything needing a specific step rather than a semantic alias
 | `--base-950` | `lab(2.51549% .19104 -.702733)` | `#09090b` |
 | `--base-1000` | `lab(.793976% .0596121 -.219867)` | `#030303` |
 
-Light mode keeps Tailwind/shadcn's stock `oklch(...)` neutrals unchanged (this system was
-only ever tuned for dark mode — light mode is the untouched shadcn default).
+Light mode is the reference dashboard's `default` theme preset's `:root` block, extracted the
+same way as the dark palette above — real values pulled from the reference site's compiled CSS,
+not shadcn's stock neutrals and not eyeballed.
 
 ## Spacing system
 
