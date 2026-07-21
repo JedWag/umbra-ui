@@ -14,9 +14,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         // Same border+tint / hover-flip shape as warning/success below, built from the
-        // destructive token instead of a --status-* pair.
+        // --status-red-* pair instead of relying on Tailwind's opacity modifier over
+        // --destructive (which doesn't reliably apply alpha to a lab()-based variable).
         danger:
-          "border border-destructive bg-destructive/10 text-destructive hover:border-destructive/10 hover:bg-destructive hover:text-destructive/10",
+          "border border-[var(--status-red-border)] bg-[var(--status-red-bg)] text-[var(--status-red-border)] hover:border-[var(--status-red-bg)] hover:bg-[var(--status-red-border)] hover:text-[var(--status-red-bg)]",
         // dialog-footer pairing: warning (Cancel) is orange, success (the primary submit,
         // "Save") is green — both are the `outline` shape tinted with a status color, and
         // swap to a solid fill with inverted text on hover. See theme.css's
