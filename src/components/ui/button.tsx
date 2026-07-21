@@ -14,7 +14,7 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         danger:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "border border-destructive/40 bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         // dialog-footer pairing: warning (Cancel) is orange, success (the primary submit,
         // "Save") is green — both are the `outline` shape tinted with a status color, and
         // swap to a solid fill with inverted text on hover. See theme.css's
