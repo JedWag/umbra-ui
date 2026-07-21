@@ -71,8 +71,8 @@ function IconButton({
 }
 
 // Standalone Cancel/Save presets: bake in variant="warning"/"success" + the default label, so
-// any caller needing just one of them (not the full DialogActions pair) doesn't hand-roll the
-// variant + text again. DialogActions is built from these two, not a separate implementation.
+// any caller needing just one of them (not the full DialogSplitFooter pair) doesn't hand-roll the
+// variant + text again. DialogSplitFooter is built from these two, not a separate implementation.
 function CancelButton({
   children = "Cancel",
   ...props

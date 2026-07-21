@@ -121,28 +121,34 @@ function DialogFooter({
   )
 }
 
-// Cancel/Save footer preset: bakes in split layout + the cancel/save color pairing so consuming
-// apps never assemble this by hand - use this instead of a bare DialogFooter for any dialog with
-// a discard-vs-commit pair of actions.
-function DialogActions({
+// Split-layout dialog footer: defaults to the common Cancel/Save pairing, but either side can
+// be overridden with any other element (e.g. left={<Button variant="danger">Delete</Button>})
+// for dialogs that don't fit the discard-vs-commit shape.
+function DialogSplitFooter({
+  left,
+  right,
   onCancel,
   onSave,
   cancelLabel = "Cancel",
   saveLabel = "Save",
   saveDisabled = false,
 }: {
-  onCancel: () => void
-  onSave: () => void
+  left?: React.ReactNode
+  right?: React.ReactNode
+  onCancel?: () => void
+  onSave?: () => void
   cancelLabel?: string
   saveLabel?: string
   saveDisabled?: boolean
 }) {
   return (
     <DialogFooter split>
-      <CancelButton onClick={onCancel}>{cancelLabel}</CancelButton>
-      <SaveButton onClick={onSave} disabled={saveDisabled}>
-        {saveLabel}
-      </SaveButton>
+      {left ?? <CancelButton onClick={onCancel}>{cancelLabel}</CancelButton>}
+      {right ?? (
+        <SaveButton onClick={onSave} disabled={saveDisabled}>
+          {saveLabel}
+        </SaveButton>
+      )}
     </DialogFooter>
   )
 }
@@ -178,7 +184,7 @@ function DialogDescription({
 
 export {
   Dialog,
-  DialogActions,
+  DialogSplitFooter,
   DialogClose,
   DialogContent,
   DialogDescription,

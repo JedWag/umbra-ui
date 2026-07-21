@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from "react"
 
 import {
   Dialog,
-  DialogActions,
+  DialogSplitFooter,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -67,7 +67,7 @@ export function SettingsDialogShell({
           ))}
         </Tabs>
 
-        <DialogActions onCancel={onCancel} onSave={onSave} saveDisabled={saveDisabled} />
+        <DialogSplitFooter onCancel={onCancel} onSave={onSave} saveDisabled={saveDisabled} />
       </DialogContent>
     </Dialog>
   )
