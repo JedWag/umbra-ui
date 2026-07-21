@@ -31,7 +31,7 @@ export function AppShell({
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 md:rounded-tl-xl md:rounded-tr-xl">
           <div className="flex items-center gap-1 lg:gap-2">
             <SidebarTrigger />
-            <Separator orientation="vertical" className="mx-2 h-4 self-auto" />
+            <Separator orientation="vertical" className="mx-2 h-4 data-[orientation=vertical]:self-auto" />
           </div>
           <div className="flex items-center gap-1">
             {headerActions}
