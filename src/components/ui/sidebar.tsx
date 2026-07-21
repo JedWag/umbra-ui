@@ -486,8 +486,14 @@ const sidebarMenuButtonVariants = cva(
       size: {
         default: "h-8 text-sm",
         sm: "h-7 text-xs",
-        md: "h-10 text-base group-data-[collapsible=icon]:p-0!",
         lg: "h-12 text-lg group-data-[collapsible=icon]:p-0!",
+        // Sidebar-specific sizes, namespaced separately from sm/default/lg above so they can
+        // be tuned independently without touching (or being confused with) the shared ladder.
+        // side-default currently matches guzzler's actual running nav-button size; side-sm/
+        // side-lg currently mirror sm/lg above as starting points, not settled values.
+        "side-sm": "h-7 text-xs",
+        "side-default": "h-10 text-base group-data-[collapsible=icon]:p-0!",
+        "side-lg": "h-12 text-lg group-data-[collapsible=icon]:p-0!",
       },
     },
     defaultVariants: {
@@ -563,7 +569,7 @@ function SidebarNavButton({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <SidebarMenuButton size="md" className={className} {...props}>
+    <SidebarMenuButton size="side-default" className={className} {...props}>
       <Icon className="size-6" />
       <span>{children}</span>
     </SidebarMenuButton>
