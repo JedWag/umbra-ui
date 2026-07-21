@@ -36,7 +36,7 @@ export function AppShell({
           <div className="flex items-center gap-1">
             {headerActions}
             <IconButton aria-label="Settings" onClick={onSettingsClick}>
-              <SettingsIcon className="size-6" />
+              <SettingsIcon />
             </IconButton>
             <ThemeToggle />
           </div>
