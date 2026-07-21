@@ -13,8 +13,10 @@ const buttonVariants = cva(
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        // Same border+tint / hover-flip shape as warning/success below, built from the
+        // destructive token instead of a --status-* pair.
         danger:
-          "border border-destructive/40 bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "border border-destructive bg-destructive/10 text-destructive hover:border-destructive/10 hover:bg-destructive hover:text-destructive/10",
         // dialog-footer pairing: warning (Cancel) is orange, success (the primary submit,
         // "Save") is green — both are the `outline` shape tinted with a status color, and
         // swap to a solid fill with inverted text on hover. See theme.css's
@@ -95,4 +97,15 @@ function SaveButton({
   )
 }
 
-export { Button, buttonVariants, IconButton, CancelButton, SaveButton }
+function DeleteButton({
+  children = "Delete",
+  ...props
+}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+  return (
+    <Button variant="danger" {...props}>
+      {children}
+    </Button>
+  )
+}
+
+export { Button, buttonVariants, IconButton, CancelButton, SaveButton, DeleteButton }
