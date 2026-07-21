@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { cn } from "../../lib/utils"
-import { Button } from "./button"
+import { Button, CancelButton, SaveButton } from "./button"
 import { XIcon } from "lucide-react"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
@@ -139,12 +139,10 @@ function DialogActions({
 }) {
   return (
     <DialogFooter split>
-      <Button variant="warning" onClick={onCancel}>
-        {cancelLabel}
-      </Button>
-      <Button variant="success" onClick={onSave} disabled={saveDisabled}>
+      <CancelButton onClick={onCancel}>{cancelLabel}</CancelButton>
+      <SaveButton onClick={onSave} disabled={saveDisabled}>
         {saveLabel}
-      </Button>
+      </SaveButton>
     </DialogFooter>
   )
 }

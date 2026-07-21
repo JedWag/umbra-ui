@@ -70,4 +70,29 @@ function IconButton({
   return <Button variant="text" size="icon" className={className} {...props} />
 }
 
-export { Button, buttonVariants, IconButton }
+// Standalone Cancel/Save presets: bake in variant="warning"/"success" + the default label, so
+// any caller needing just one of them (not the full DialogActions pair) doesn't hand-roll the
+// variant + text again. DialogActions is built from these two, not a separate implementation.
+function CancelButton({
+  children = "Cancel",
+  ...props
+}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+  return (
+    <Button variant="warning" {...props}>
+      {children}
+    </Button>
+  )
+}
+
+function SaveButton({
+  children = "Save",
+  ...props
+}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+  return (
+    <Button variant="success" {...props}>
+      {children}
+    </Button>
+  )
+}
+
+export { Button, buttonVariants, IconButton, CancelButton, SaveButton }
