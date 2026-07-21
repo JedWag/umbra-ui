@@ -1,17 +1,17 @@
-# ui-kit-shadcn — current state (as of 2026-07-21)
+# umbra — current state (as of 2026-07-21)
 
 ## What it is
 
-A shared, installable design-system package (`ui-kit-shadcn`, currently `v0.1.0`, `private: true`)
+A shared, installable design-system package (`umbra`, currently `v0.1.0`, `private: true`)
 built on `@base-ui/react` + Tailwind CSS 4. Ships theme CSS, shadcn-style primitives, and shared
 structural patterns (app shell, settings dialog). Meant to be installed as a real npm dependency
 in each consuming app, not copy-pasted — see `README.md` for the full rationale and install/usage
 instructions.
 
-Installed from `github.com/JedWag/ui-kit-shadcn` via:
+Installed from `github.com/JedWag/umbra` via:
 
 ```
-npm install git+https://github.com/JedWag/ui-kit-shadcn.git
+npm install git+https://github.com/JedWag/umbra.git
 ```
 
 **Current consumers:** both `qb` (`/home/jed/Eco/qb/frontend/package.json`) and `guzzler`
@@ -20,7 +20,7 @@ npm install git+https://github.com/JedWag/ui-kit-shadcn.git
 ## Package layout
 
 ```
-ui-kit-shadcn/
+umbra/
 ├── README.md               # install + usage instructions
 ├── note.md                 # extraction notes: font, palette values pulled from reference dashboard
 ├── notes/notes.md           # this file
@@ -107,7 +107,7 @@ b0ecc95 Add split prop to DialogFooter for Cancel/Save left-right layout
 447b0a6 Fix Tailwind not scanning kit source when installed as a dependency
 ca0289e July 19, 2026 07:20PM
 36ff995 July 19, 2026 03:37PM
-dbeabff Rename package to ui-kit-shadcn for alphabetical grouping with future ui-kits
+dbeabff Rename package to umbra for alphabetical grouping with future ui-kits
 8dac4ef Initial extraction: portable shadcn-based dark dashboard design system
 ```
 

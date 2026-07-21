@@ -1,4 +1,4 @@
-# ui-kit-shadcn
+# umbra
 
 ## Goal
 
@@ -17,7 +17,7 @@ Built on `@base-ui/react` and Tailwind CSS 4.
 This is meant to be **installed as a dependency in each project, not copy-pasted**. That's the
 whole point: code that lives in `node_modules` is naturally hands-off, because the next
 `npm install` would wipe local edits anyway. Want a change? Edit it here, in this repo, then
-update the version in whichever project consumes it. Never edit `ui-kit-shadcn` files from
+update the version in whichever project consumes it. Never edit `umbra` files from
 inside a project that installed it.
 
 See `docs/DESIGN-SYSTEM.md` for the rationale behind the palette/spacing/component choices —
@@ -26,22 +26,22 @@ copy values out of by hand.
 
 ## Installing in a project
 
-This repo is public on GitHub (`github.com/JedWag/ui-kit-shadcn`) — **install from there, not
+This repo is public on GitHub (`github.com/JedWag/umbra`) — **install from there, not
 from a local path.** A local `file:` path only resolves on the one machine that has this repo
 checked out at that exact location; it breaks for anyone else and for CI. From the consuming
 project:
 
 ```
-npm install git+https://github.com/JedWag/ui-kit-shadcn.git
+npm install git+https://github.com/JedWag/umbra.git
 ```
 
 npm clones the repo and installs it into `node_modules` as a real copy — not a symlink, so
 editing the installed copy won't touch this repo and won't survive a reinstall, which is exactly
 the boundary you want. It also means a plain `npm install` never picks up new commits on its
 own — after pushing a change here, bump the dependency (or just delete
-`node_modules/ui-kit-shadcn` and reinstall) in each consuming project to pick it up.
+`node_modules/umbra` and reinstall) in each consuming project to pick it up.
 
-(A local `file:../path/to/ui-kit-shadcn` install still works during active same-day development
+(A local `file:../path/to/umbra` install still works during active same-day development
 on both the kit and a consumer at once, but treat it as temporary — switch back to the git URL
 before committing.)
 
@@ -53,7 +53,7 @@ before committing.)
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "ui-kit-shadcn/theme.css";
+@import "umbra/theme.css";
 ```
 
 Ships a real light palette and a real dark palette, both extracted from the reference
@@ -62,7 +62,7 @@ dashboard's `default` theme preset — not shadcn's stock neutrals.
 **2. Wrap your app in the theme provider:**
 
 ```tsx
-import { ThemeProvider, Toaster } from "ui-kit-shadcn"
+import { ThemeProvider, Toaster } from "umbra"
 
 function App() {
   return (
@@ -77,7 +77,7 @@ function App() {
 **3. Import components as needed:**
 
 ```tsx
-import { Button, Card, CardContent, Dialog, DialogContent } from "ui-kit-shadcn"
+import { Button, Card, CardContent, Dialog, DialogContent } from "umbra"
 ```
 
 **4. Dialog footer buttons** — every dialog in the reference app pairs an orange `cancel`
