@@ -80,13 +80,33 @@ function DialogContent({
   )
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+// The most basic thing every dialog has: a title, and an optional one-line description under
+// it. Pass title/description for the common case; pass children instead for anything custom.
+function DialogHeader({
+  className,
+  title,
+  description,
+  children,
+  ...props
+}: Omit<React.ComponentProps<"div">, "title"> & {
+  title?: React.ReactNode
+  description?: React.ReactNode
+}) {
   return (
     <div
       data-slot="dialog-header"
       className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
       {...props}
-    />
+    >
+      {title !== undefined ? (
+        <>
+          <DialogTitle>{title}</DialogTitle>
+          {description !== undefined && <DialogDescription>{description}</DialogDescription>}
+        </>
+      ) : (
+        children
+      )}
+    </div>
   )
 }
 
