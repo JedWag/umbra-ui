@@ -486,6 +486,7 @@ const sidebarMenuButtonVariants = cva(
       size: {
         default: "h-8 text-sm",
         sm: "h-7 text-xs",
+        md: "h-10 text-base group-data-[collapsible=icon]:p-0!",
         lg: "h-12 text-lg group-data-[collapsible=icon]:p-0!",
       },
     },
@@ -562,7 +563,7 @@ function SidebarNavButton({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <SidebarMenuButton size="lg" className={className} {...props}>
+    <SidebarMenuButton size="md" className={className} {...props}>
       <Icon className="size-6" />
       <span>{children}</span>
     </SidebarMenuButton>
