@@ -13,19 +13,6 @@ const buttonVariants = cva(
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        // Same border+tint / hover-flip shape as warning/success below, built from the
-        // --status-red-* pair instead of relying on Tailwind's opacity modifier over
-        // --destructive (which doesn't reliably apply alpha to a lab()-based variable).
-        danger:
-          "border border-[var(--status-red-border)] bg-[var(--status-red-bg)] text-[var(--status-red-border)] hover:border-[var(--status-red-bg)] hover:bg-[var(--status-red-border)] hover:text-[var(--status-red-bg)]",
-        // dialog-footer pairing: warning (Cancel) is orange, success (the primary submit,
-        // "Save") is green — both are the `outline` shape tinted with a status color, and
-        // swap to a solid fill with inverted text on hover. See theme.css's
-        // --status-*-border/--status-*-bg vars.
-        warning:
-          "border border-[var(--status-orange-border)] bg-[var(--status-orange-bg)] text-[var(--status-orange-border)] hover:border-[var(--status-orange-bg)] hover:bg-[var(--status-orange-border)] hover:text-[var(--status-orange-bg)]",
-        success:
-          "border border-[var(--status-green-border)] bg-[var(--status-green-bg)] text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -73,40 +60,62 @@ function IconButton({
   return <Button variant="text" size="icon" className={className} {...props} />
 }
 
-// Standalone Cancel/Save presets: bake in variant="warning"/"success" + the default label, so
-// any caller needing just one of them (not the full DialogSplitFooter pair) doesn't hand-roll the
-// variant + text again. DialogSplitFooter is built from these two, not a separate implementation.
-function CancelButton({
-  children = "Cancel",
-  ...props
-}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+type PresetButtonProps = Omit<ButtonPrimitive.Props, "children"> & {
+  size?: VariantProps<typeof buttonVariants>["size"]
+  children?: React.ReactNode
+}
+
+// Status-color action buttons: own their color styling directly (border+tint, hover-flip to a
+// solid fill) instead of going through Button's variant system - nothing ever picked these
+// colors as a plain Button variant, so keeping them as standalone modules avoids a redundant
+// unused variant sitting in buttonVariants. Default label matches the button's usual role, but
+// can be overridden (e.g. <SuccessButton>Yes</SuccessButton>).
+function WarningButton({ className, size = "default", children = "Cancel", ...props }: PresetButtonProps) {
   return (
-    <Button variant="warning" {...props}>
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(
+        buttonVariants({ size }),
+        "border border-[var(--status-orange-border)] bg-[var(--status-orange-bg)] text-[var(--status-orange-border)] hover:border-[var(--status-orange-bg)] hover:bg-[var(--status-orange-border)] hover:text-[var(--status-orange-bg)]",
+        className
+      )}
+      {...props}
+    >
       {children}
-    </Button>
+    </ButtonPrimitive>
   )
 }
 
-function SaveButton({
-  children = "Save",
-  ...props
-}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+function SuccessButton({ className, size = "default", children = "Save", ...props }: PresetButtonProps) {
   return (
-    <Button variant="success" {...props}>
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(
+        buttonVariants({ size }),
+        "border border-[var(--status-green-border)] bg-[var(--status-green-bg)] text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
+        className
+      )}
+      {...props}
+    >
       {children}
-    </Button>
+    </ButtonPrimitive>
   )
 }
 
-function DeleteButton({
-  children = "Delete",
-  ...props
-}: Omit<ButtonPrimitive.Props, "children"> & { children?: React.ReactNode }) {
+function DangerButton({ className, size = "default", children = "Delete", ...props }: PresetButtonProps) {
   return (
-    <Button variant="danger" {...props}>
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(
+        buttonVariants({ size }),
+        "border border-[var(--status-red-border)] bg-[var(--status-red-bg)] text-[var(--status-red-border)] hover:border-[var(--status-red-bg)] hover:bg-[var(--status-red-border)] hover:text-[var(--status-red-bg)]",
+        className
+      )}
+      {...props}
+    >
       {children}
-    </Button>
+    </ButtonPrimitive>
   )
 }
 
-export { Button, buttonVariants, IconButton, CancelButton, SaveButton, DeleteButton }
+export { Button, buttonVariants, IconButton, WarningButton, SuccessButton, DangerButton }

@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { cn } from "../../lib/utils"
-import { Button, CancelButton, SaveButton } from "./button"
+import { Button, WarningButton, SuccessButton } from "./button"
 import { XIcon } from "lucide-react"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
@@ -149,7 +149,7 @@ function DialogFooter({
 }
 
 // Split-layout dialog footer: defaults to the common Cancel/Save pairing, but either side can
-// be overridden with any other element (e.g. left={<Button variant="danger">Delete</Button>})
+// be overridden with any other element (e.g. right={<DangerButton>Delete</DangerButton>})
 // for dialogs that don't fit the discard-vs-commit shape.
 function DialogSplitFooter({
   left,
@@ -170,11 +170,11 @@ function DialogSplitFooter({
 }) {
   return (
     <DialogFooter split>
-      {left ?? <CancelButton onClick={onCancel}>{cancelLabel}</CancelButton>}
+      {left ?? <WarningButton onClick={onCancel}>{cancelLabel}</WarningButton>}
       {right ?? (
-        <SaveButton onClick={onSave} disabled={saveDisabled}>
+        <SuccessButton onClick={onSave} disabled={saveDisabled}>
           {saveLabel}
-        </SaveButton>
+        </SuccessButton>
       )}
     </DialogFooter>
   )
