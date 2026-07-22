@@ -3,6 +3,7 @@ export * from "./lib/theme-provider"
 export * from "./components/theme-toggle"
 export * from "./components/app-shell"
 export * from "./components/month-field"
+export * from "./components/search-drop-filter"
 export * from "./components/settings-tab-section"
 export * from "./components/settings-dialog-shell"
 
