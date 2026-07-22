@@ -34,6 +34,7 @@ export function SearchDropFilter({
     <Popover open={open} onOpenChange={setOpen}>
       <Command className="overflow-visible bg-transparent p-0">
         <PopoverTrigger
+          nativeButton={false}
           render={
             <div className="flex items-center gap-1.5 text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
               <Filter />
