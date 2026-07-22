@@ -64,6 +64,9 @@ npm install git+https://github.com/JedWag/umbra.git
 > `npm install file:../umbra`
 > Just revert back to the GitHub URL before committing.
 
+> [!NOTE]
+> **Future direction:** once umbra is more developed/stable, this repo will move from a `git+https://...` dependency to a real published package on **GitHub Packages** (`@jedwag/umbra-ui`, scoped npm registry, semver-versioned via `npm version` + `npm publish`). That fixes the git-install restriction some machines have and gives consuming apps proper version pinning instead of always tracking `main`. Not done yet — keep using the git+https / temporary `file:` workflow above until this note is updated.
+
 ### 2. Stylesheet Setup
 Include the design system styles in your app's root stylesheet right after Tailwind and base shadcn styles:
 
