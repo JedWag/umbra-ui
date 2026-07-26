@@ -52,8 +52,8 @@ Tailwind v4 scans installed component source through the `@source` directive in
 ## Repository layout
 
 - `src/` — package source and public barrel
-- `docs/` — durable project, development, architecture, UI, design, distribution, and
-  decision documentation
+- `docs/` — durable project, development, architecture, UI, distribution, and decision
+  documentation
 - `assets/examples/` — ignored reference captures used for visual comparison, not package
   contents or public API
 - `components.json` — shadcn generator configuration

@@ -74,7 +74,6 @@ When making a project change, update the relevant document if that change affect
 - `docs/project.md` — Umbra's purpose, current consumers, package scope, current capabilities, and constraints.
 - `docs/development.md` — installation, type checking, package validation, shadcn additions, and development workflow.
 - `docs/architecture.md` — client-side stack, package boundaries, exports, component layers, and directory responsibilities.
-- `docs/ui.md` — shared UI ownership, extraction criteria, composition rules, public component families, and styling invariants.
-- `docs/DESIGN-SYSTEM.md` — detailed theme, typography, spacing, status-color, and structural-shell reference.
+- `docs/ui.md` — shared UI ownership, extraction criteria, composition rules, component families, and design-system invariants.
 - `docs/deployment.md` — current Git dependency distribution, consumer integration, and planned GitHub Packages direction.
 - `docs/decisions.md` — rationale for project neutrality, local-first promotion, source distribution, and public API conventions.
