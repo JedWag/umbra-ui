@@ -7,14 +7,11 @@
 - **Act only when told** — do not make changes mid-conversation based on observations or implications. Finish the discussion, then act when the user says go.
 - **Use the simplest command form** — never reach for a more complex variant (e.g. `git -C <path>`) when a simpler form (e.g. `git add`) already works and is covered by permissions. The working directory is already set; use it.
 - **Cheap model for simple subagents** — when spawning a subagent (Agent tool) for exploration, file search, or other simple lookup work, always pass `model: "haiku"`. Only use the default/heavier model when the subagent must do real reasoning, design, or multi-step implementation.
+- **Number suggestions** — when presenting multiple suggestions, options, or questions, number them so the user can respond by number without retyping them.
 
 ---
 
 ## Guidelines
-
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
-
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
 ### 1. Think Before Coding
 
@@ -64,14 +61,20 @@ Transform tasks into verifiable goals:
 - "Refactor X" → "Ensure tests pass before and after"
 
 For multi-step tasks, state a brief plan:
-```
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]
 3. [Step] → verify: [check]
-```
 
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+## Repository Documentation
 
----
+Start with the document directly relevant to the current task. Consult additional documents only when the task crosses those boundaries.
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+When making a project change, update the relevant document if that change affects its contents. Update the document's short snapshot below only when its scope or responsibilities change.
+
+- `docs/project.md` — Umbra's purpose, current consumers, package scope, current capabilities, and constraints.
+- `docs/development.md` — installation, type checking, package validation, shadcn additions, and development workflow.
+- `docs/architecture.md` — client-side stack, package boundaries, exports, component layers, and directory responsibilities.
+- `docs/ui.md` — shared UI ownership, extraction criteria, composition rules, public component families, and styling invariants.
+- `docs/DESIGN-SYSTEM.md` — detailed theme, typography, spacing, status-color, and structural-shell reference.
+- `docs/deployment.md` — current Git dependency distribution, consumer integration, and planned GitHub Packages direction.
+- `docs/decisions.md` — rationale for project neutrality, local-first promotion, source distribution, and public API conventions.
