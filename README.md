@@ -83,5 +83,5 @@ Export every public component, hook, type, and utility through `src/index.ts`, t
 npx tsc --noEmit
 ```
 
-See `docs/` for the package architecture, UI ownership and design rules, distribution model,
-and recorded decisions.
+See `docs/01-index.md` for the package architecture, UI ownership and design rules,
+distribution model, and recorded decisions.

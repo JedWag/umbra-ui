@@ -1,13 +1,13 @@
-# AGENTS.md
+# CLAUDE.md
 
 ## Conventions
 
-- **Use `gush` after every change** — after every edit, follow the `gush` skill to inspect, stage, commit, push, and verify the complete working tree, including the user's existing changes.
+- **Push after every change** — after every edit, run `git add -A`, write a commit message derived from the diff, and push. This includes the user's own uncommitted changes — never push only Claude's changes.
 - **Talk before planning** — for any non-trivial problem, have a back-and-forth conversation to work through the solution together before writing a plan. Do not rush to plan mode. The user needs to be able to bounce ideas and push back before anything is locked in.
 - **Act only when told** — do not make changes mid-conversation based on observations or implications. Finish the discussion, then act when the user says go.
 - **Use the simplest command form** — never reach for a more complex variant (e.g. `git -C <path>`) when a simpler form (e.g. `git add`) already works and is covered by permissions. The working directory is already set; use it.
-- **Cheap model for simple subagents** — when spawning a subagent for exploration, file reading, file search, or other simple lookup work, always use `model: "gpt-5.6-terra"` with low reasoning effort. Only use the default/heavier model when the subagent must do real reasoning, design, or multi-step implementation.
-- **Number suggestions** — number top-level suggestions, options, and questions; use letters for nested items so each can be referenced without retyping it.
+- **Cheap model for simple subagents** — when spawning a subagent (Agent tool) for exploration, file search, or other simple lookup work, always pass `model: "haiku"`. Only use the default/heavier model when the subagent must do real reasoning, design, or multi-step implementation.
+- **Number suggestions** — when presenting multiple suggestions, options, or questions, number them so the user can respond by number without retyping them.
 
 ---
 
@@ -65,8 +65,15 @@ For multi-step tasks, state a brief plan:
 2. [Step] → verify: [check]
 3. [Step] → verify: [check]
 
----
-
 ## Repository Documentation
 
-See `docs/01-index.md` for the document index and guidance on which document to consult.
+Start with the document directly relevant to the current task. Consult additional documents only when the task crosses those boundaries.
+
+When making a project change, update the relevant document if that change affects its contents. Update the document's short snapshot below only when its scope or responsibilities change.
+
+- `docs/project.md` — Umbra's purpose, current consumers, package scope, current capabilities, and constraints.
+- `docs/development.md` — installation, type checking, package validation, shadcn additions, and development workflow.
+- `docs/architecture.md` — client-side stack, package boundaries, exports, component layers, and directory responsibilities.
+- `docs/ui.md` — shared UI ownership, extraction criteria, composition rules, component families, and design-system invariants.
+- `docs/deployment.md` — current Git dependency distribution, consumer integration, and planned GitHub Packages direction.
+- `docs/decisions.md` — rationale for project neutrality, local-first promotion, source distribution, and public API conventions.

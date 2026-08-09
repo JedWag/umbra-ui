@@ -1,8 +1,8 @@
-# AGENTS.md
+# CLAUDE.md
 
 ## Conventions
 
-- **Use `gush` after every change** — after every edit, follow the `gush` skill to inspect, stage, commit, push, and verify the complete working tree, including the user's existing changes.
+- **Push after every change** — after every edit, run `git add -A`, write a commit message derived from the diff, and push. This includes the user's own uncommitted changes — never push only Claude's changes.
 - **Talk before planning** — for any non-trivial problem, have a back-and-forth conversation to work through the solution together before writing a plan. Do not rush to plan mode. The user needs to be able to bounce ideas and push back before anything is locked in.
 - **Act only when told** — do not make changes mid-conversation based on observations or implications. Finish the discussion, then act when the user says go.
 - **Use the simplest command form** — never reach for a more complex variant (e.g. `git -C <path>`) when a simpler form (e.g. `git add`) already works and is covered by permissions. The working directory is already set; use it.
@@ -65,8 +65,15 @@ For multi-step tasks, state a brief plan:
 2. [Step] → verify: [check]
 3. [Step] → verify: [check]
 
----
-
 ## Repository Documentation
 
-See `docs/01-index.md` for the document index and guidance on which document to consult.
+Start with the document directly relevant to the current task. Consult additional documents only when the task crosses those boundaries.
+
+When making a project change, update the relevant document if that change affects its contents. Update the document's short snapshot below only when its scope or responsibilities change.
+
+- `docs/project.md` — form-library purpose, current documents, scope, operational constraints, and sensitive-data warning.
+- `docs/development.md` — static-form editing, employee-cover generation, browser/PDF validation, and known tooling gaps.
+- `docs/architecture.md` — static HTML and Python boundaries, generation flow, external fonts, artifacts, and directory layout.
+- `docs/data.md` — sensitive CSV source fields, transformation rules, generated derivatives, stale-output risk, and handling rules.
+- `docs/ui.md` — independent work-form design language, palette, typography, page geometry, reusable patterns, and print rules.
+- `docs/decisions.md` — rationale for an independent design system, self-contained forms, category colors, and generated covers.
