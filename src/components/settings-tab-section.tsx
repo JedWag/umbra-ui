@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 /**
  * Section header (title + action button) over a scrollable content area, used
  * inside each TabsContent of a tabbed settings dialog. See
- * docs/ui.md "Structural shells".
+ * docs/02-ui.md "Project UI Structure".
  */
 export function SettingsTabSection({
   title,

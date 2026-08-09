@@ -7,7 +7,7 @@ import { ThemeToggle } from "./theme-toggle"
 
 /**
  * The standard page shell: sidebar + rounded floating header/content panel.
- * See docs/ui.md "Structural shells" for the rationale.
+ * See docs/02-ui.md "Project UI Structure" for the rationale.
  *
  * ThemeToggle + a Settings button are always present (identical in every consuming app) -
  * onSettingsClick wires the Settings button, headerActions is purely for app-specific extras

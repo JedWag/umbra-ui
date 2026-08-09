@@ -20,7 +20,7 @@ export type SettingsTab = {
  * Full tabbed settings dialog: sizing/positioning, the tab ribbon, and the
  * Cancel/Save footer are all baked in - apps supply tab content and two
  * handlers, nothing else. Wrap each tab's content in SettingsTabSection.
- * See docs/ui.md "Structural shells".
+ * See docs/02-ui.md "Project UI Structure".
  */
 export function SettingsDialogShell({
   open,
