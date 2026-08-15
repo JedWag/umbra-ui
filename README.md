@@ -15,13 +15,39 @@ Until versioned package publishing is implemented, install directly from this re
 npm install git+https://github.com/JedWag/umbra-ui.git
 ```
 
+npm 11+ can refuse Git-dependency installs outright with `EALLOWGIT` if `allow-git`
+resolves to `none` in effect (a project `.npmrc`, a user/global `.npmrc`, or an
+environment/sandbox policy). Check the effective value with `npm config get allow-git`.
+If it is not `all` or `root`, add a project-level `.npmrc` next to this consumer's
+`package.json`:
+
+```
+allow-git=root
+```
+
+`root` allows Git dependencies declared directly in the consumer's own `package.json`
+(such as `umbra`) while still blocking Git dependencies pulled in transitively by
+other packages. Then run `npm install` normally.
+
+The install resolves to a specific commit and records it in `package-lock.json`, so
+repeated installs stay reproducible. To pick up new `umbra-ui` commits later, run:
+
+```bash
+npm update umbra
+```
+
 For coordinated local development, a consumer can temporarily use a sibling checkout:
 
 ```bash
 npm install file:../umbra-ui
 ```
 
-Restore the Git dependency before committing consumer changes.
+This exposes Umbra's local `node_modules` to the consumer's TypeScript compiler. If the
+consumer and Umbra checkouts have different `@types/react` patch versions, TypeScript can
+load two incompatible `React.Ref` identities and reject valid Umbra components (observed
+with consumer `@types/react` 19.2.18 vs. Umbra checkout 19.2.17 on `skeleton.tsx`). Keep
+both checkouts' `@types/react`/`@types/react-dom` versions aligned before relying on this
+path, and restore the Git dependency before committing consumer changes.
 
 ## Configure styles
 
