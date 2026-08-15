@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=__APP_NAME__
+Exec=bash -c 'cd __APP_DIR__ && ./run.sh'
+Icon=__ICON_PATH__
+Terminal=false
+Type=Application

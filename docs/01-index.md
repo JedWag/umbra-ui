@@ -9,7 +9,7 @@ When a change affects a document's contents, note it rather than rewriting the d
 - `docs/02-ui.md` — shared UI ownership, theme foundation, composition rules, component families, and interaction conventions.
 - `docs/03-project.md` — Umbra's purpose, current package capabilities, ownership boundary, constraints, and data posture.
 - `docs/04-architecture.md` — client-side stack, package boundary, runtime flow, integrations, and source layout.
-- `docs/05-development.md` — installation, type checking, package inspection, component additions, and promotion workflow.
+- `docs/05-development.md` — installation, type checking, package inspection, component additions, promotion workflow, the consumer app launcher template, and the icon launcher template.
 - `docs/06-database.md` — why database and persisted domain-data concerns do not apply to this source package.
 - `docs/07-deployment.md` — current Git-based source distribution, consumer requirements, operations, and unresolved publishing choices.
 - `docs/08-decisions.md` — durable rationale for project neutrality, promotion, the public API, source distribution, and future versioning.
