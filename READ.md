@@ -5,7 +5,7 @@ A Chrome app launcher that supplies a new dedicated profile directory, for examp
 ```bash
 google-chrome-stable \
     --app=http://localhost:9290 \
-    --user-data-dir="$HOME/.cache/example-chrome-app" \
+    --user-data-dir="$HOME/.cache/example/chrome" \
     --new-window
 ```
 
@@ -16,7 +16,7 @@ Consumer launchers should suppress those screens:
 ```bash
 google-chrome-stable \
     --app=http://localhost:9290 \
-    --user-data-dir="$HOME/.cache/example-chrome-app" \
+    --user-data-dir="$HOME/.cache/example/chrome" \
     --no-first-run \
     --no-default-browser-check \
     --new-window
