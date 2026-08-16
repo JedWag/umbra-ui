@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//home/jed/Eco/guzzler/frontend/**)",
-      "Bash(npm config *)",
-      "Bash(npm install *)"
-    ]
-  }
-}
