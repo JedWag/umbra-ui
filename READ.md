@@ -1,25 +1,47 @@
-# Consumer app first launch
+# Run Renamer on macOS
 
-A Chrome app launcher that supplies a new dedicated profile directory, for example:
+Renamer's React/Vite frontend does not require platform-specific changes. Only
+`run.sh` needs to be adapted for macOS.
+
+## Frontend requirements
+
+- Install Node.js `^20.19.0` or `>=22.12.0`.
+- Run `npm ci` from Renamer's `frontend/` directory.
+- The frontend, local PDF selection, and browser PDF viewer work on macOS.
+
+## Required `run.sh` changes
+
+- Replace `setsid`, which is not included with macOS.
+- Replace the process-group cleanup command, `kill -- -"$FRONTEND_PID"`, because
+  it depends on the process group created by `setsid`.
+- Replace the Linux `google-chrome-stable` command with the macOS executable:
+
+  ```text
+  /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+  ```
+
+- Consider moving the dedicated Chrome profile from
+  `$HOME/.cache/renamer/chrome` to the conventional macOS location:
+
+  ```text
+  $HOME/Library/Application Support/renamer/chrome
+  ```
+
+  The existing `.cache` location should still function, so this move is
+  optional.
+
+The adapted launcher should continue to prevent duplicate Renamer instances,
+start Vite on port 9390, open Chrome in app mode with a dedicated profile, and
+stop Vite when Chrome exits or the launcher is interrupted.
+
+## Run without the launcher
+
+Until `run.sh` is adapted, start Renamer manually on macOS:
 
 ```bash
-google-chrome-stable \
-    --app=http://localhost:9290 \
-    --user-data-dir="$HOME/.cache/example/chrome" \
-    --new-window
+cd frontend
+npm ci
+npm run dev
 ```
 
-does not use the person's existing Chrome profile. On a fresh machine or the first launch of a new app profile, Chrome can show its first-run and default-browser setup instead of the application.
-
-Consumer launchers should suppress those screens:
-
-```bash
-google-chrome-stable \
-    --app=http://localhost:9290 \
-    --user-data-dir="$HOME/.cache/example/chrome" \
-    --no-first-run \
-    --no-default-browser-check \
-    --new-window
-```
-
-Using a dedicated profile remains important when the launcher must keep ownership of the Chrome process and stop the application's backend and frontend when its window closes.
+Then open `http://localhost:9390` in Chrome.
