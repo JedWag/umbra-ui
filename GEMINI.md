@@ -2,7 +2,7 @@
 
 ## Conventions
 
-- **Use `gush` after every change** — after every edit, follow the `gush` skill to inspect, stage, commit, push, and verify the complete working tree, including the user's existing changes.
+- **Use `gush` before yielding** — if you changed the repository during the current turn, read and follow the current `gush` skill before ending the turn and returning control to the user.
 - **Talk before planning** — for any non-trivial problem, have a back-and-forth conversation to work through the solution together before writing a plan. Do not rush to plan mode. The user needs to be able to bounce ideas and push back before anything is locked in.
 - **Act only when told** — do not make changes mid-conversation based on observations or implications. Finish the discussion, then act when the user says go.
 - **Use the simplest command form** — never reach for a more complex variant (e.g. `git -C <path>`) when a simpler form (e.g. `git add`) already works and is covered by permissions. The working directory is already set; use it.
