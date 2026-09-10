@@ -7,7 +7,7 @@ function Spinner({ className, ...props }: React.ComponentProps<"div">) {
       role="status"
       aria-label="Loading"
       className={cn(
-        "size-9 animate-spin rounded-full border-[3px] border-border border-t-[var(--status-green-border)]",
+        "size-[72px] animate-[spin_0.8s_linear_infinite] rounded-full border-4 border-[#2e2e2e] border-t-[#42c383]",
         className
       )}
       {...props}
