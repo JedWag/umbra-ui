@@ -111,3 +111,10 @@ npx tsc --noEmit
 
 See `docs/01-index.md` for the package architecture, UI ownership and design rules,
 distribution model, and recorded decisions.
+
+## Consumer launcher
+
+For Python/FastAPI + Vite apps on Linux and macOS, copy `templates/run.sh` and
+`templates/launcher.json` into the app root and fill in the app-specific values.
+The shell entry invokes the shared `launcher/launch.py` from the installed Umbra
+package. See [Development](docs/05-development.md#consumer-app-launcher) for setup.

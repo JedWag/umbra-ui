@@ -18,7 +18,7 @@ Umbra owns behavior and presentation intended to remain consistent across applic
 
 The package distributes raw TypeScript/TSX and CSS rather than compiled artifacts. Consumers therefore need compatible ESM, React 19, TypeScript/TSX, and Tailwind 4 tooling. Interactive components rely on browser APIs and are not server-only modules.
 
-Umbra has no backend, router, authentication system, standalone runtime, or domain workflow. New shared APIs must remain project-neutral and be exported through `src/index.ts`.
+Umbra has no domain backend, router, authentication system, standalone application, or domain workflow. It also ships a shared Linux/macOS launcher for consumer-owned Python/FastAPI and Vite servers. New shared APIs must remain project-neutral and be exported through `src/index.ts`.
 
 ## Important Data
 

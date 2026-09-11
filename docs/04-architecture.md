@@ -8,7 +8,7 @@ React and React DOM are peer dependencies. TypeScript runs in strict, isolated, 
 
 ## System Boundaries
 
-`package.json` exposes two package entry points: `umbra` resolves to `src/index.ts`, and `umbra/theme.css` resolves to `src/styles/theme.css`. The package ships `src/` and `README.md`; consumers compile the source and generate its Tailwind styles.
+`package.json` exposes two package entry points: `umbra` resolves to `src/index.ts`, and `umbra/theme.css` resolves to `src/styles/theme.css`. The package ships `src/`, `launcher/`, `templates/`, and `README.md`; consumers compile the source and generate its Tailwind styles.
 
 `src/index.ts` is the supported public TypeScript barrel. The primitive layer owns shared interaction wrappers and visual defaults. Compound components and shells own reusable geometry and browser UI behavior. Consuming applications own routing, domain state, data access, and feature composition.
 
@@ -35,3 +35,10 @@ GitHub is the current package source. npm installs the Git repository or a tempo
 - `package.json` and `package-lock.json` — package metadata and locked dependencies.
 - `tsconfig.json` — strict no-emit validation configuration.
 - `docs/` — current project documentation.
+
+## Consumer Launcher
+
+`launcher/launch.py` is shared Python tooling for starting consumer-owned FastAPI
+and Vite servers on Linux and macOS. Consumer `launcher.json` supplies app identity,
+ports, backend module, and icon. `templates/run.sh` bootstraps the installed launcher.
+This tooling is separate from the browser UI exports and owns no domain backend.

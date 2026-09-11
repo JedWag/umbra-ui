@@ -48,24 +48,36 @@ Review generated code against the existing Base UI and styling conventions, then
 
 Experimental or domain-specific UI begins in a consumer. Promote it only after removing domain assumptions and identifying shared geometry and behavior. Consumers may temporarily use `npm install file:../umbra-ui` for coordinated local work, but should restore the Git dependency before committing their changes.
 
-## Consumer App Launcher Template
+## Consumer App Launcher
 
-`templates/run.sh` is the canonical launcher script for a consumer app (Python API + Vite frontend, opened as a chrome-less app window). Copy it into a new consumer's root as `run.sh` and fill in `APP_NAME`, `API_PORT`, `API_CMD`, and `FRONTEND_URL`.
+`launcher/launch.py` owns dependency setup, Chrome discovery, Linux desktop and
+macOS app entry creation, instance locking, readiness checks, and process cleanup
+for Python/FastAPI + Vite consumers. It ships in the Umbra npm package.
 
-It standardizes behavior that previously drifted independently across consumers:
+Copy `templates/run.sh` and `templates/launcher.json` into the consumer root.
+Fill in the JSON fields: `name` (display name), `slug` (cache and executable name),
+`bundle_id` (macOS identifier), `api_module` (Uvicorn module), `api_port`,
+`frontend_port`, and `icon` (Linux icon path relative to the consumer root).
+The browser URL is derived from `frontend_port`. Keep the consumer's Vite API
+proxy pointed at `api_port`.
 
-- an instance-lock check so a second `run.sh` run focuses the existing window instead of piling up new ones
-- a consistent Chrome profile directory naming convention: `$HOME/.cache/<APP_NAME>/chrome`
-- pre-creating an empty `First Run` marker file in the profile directory before Chrome's first real launch, so the first-run welcome/default-browser popup never appears — Chrome only shows that popup when the marker is absent; the file's contents are irrelevant, only its presence is checked
-- `setsid` + a `trap cleanup` on the API and frontend process groups, so closing the app window stops both servers
-- killing any leftover process on the API port from a previous run before starting
+Consumers need Python 3.10+, Git, Chrome, Node 20.19+ or 22.12+ (excluding Node 21),
+`pyproject.toml`, and a `frontend/` containing an npm lockfile, `.npmrc`, and
+`dev`/`build` scripts. Run `./run.sh` once from a terminal. The small shell entry
+installs npm dependencies if the shared launcher is missing, then invokes the
+installed launcher with the consumer root. Later dependency changes are handled
+by the shared launcher. Update the consumer's locked Umbra dependency to receive
+launcher changes; no second Umbra checkout is needed.
 
-Update this template (not each consumer's copy independently) when the pattern needs to change, then backport the change to existing consumers.
+The launcher installs `~/.local/share/applications/<slug>.desktop` on Linux or
+`~/Applications/<name>.app` on macOS, recording the terminal PATH. Rerun from a
+terminal after moving the checkout or installed tools. Cache, Chrome profile,
+lock, and desktop-launch logs live under `~/.cache/<slug>` on Linux or
+`~/Library/Caches/<slug>` on macOS.
 
-## Icon Launcher Template
+The app uses development servers with live reload. Closing Chrome stops the
+started process groups. Duplicate launches exit; occupied ports produce an error.
+Actual macOS operation must be verified by running the consumer on a Mac.
 
-`templates/app.desktop` is the canonical menu/taskbar launcher entry for a consumer app. Fill in `__APP_NAME__`, `__APP_DIR__` (absolute path to the app's root, where `run.sh` lives), and `__ICON_PATH__` (an absolute path to an icon file, e.g. `/home/jed/.icons/<theme>/scalable/apps/<app>.svg` — a bare icon name like `qb` will silently fail to resolve unless a matching icon is actually installed in an icon theme, so prefer an absolute path).
-
-Install it by copying the filled-in file to `~/.local/share/applications/<app>.desktop`. On this machine that directory is a symlink into the dotfiles repo (`~/Dotfiles/dots/system/arch/applications`), so placing it there is equivalent to editing dotfiles directly — no separate sync step needed.
-
-The `Exec` line `cd`s into the app directory before running `./run.sh`, so it works regardless of the launcher's own working directory, independent of whether `run.sh` itself has a leading `cd "$(dirname "$0")"`.
+`templates/app.desktop` remains available for manually managed Linux entries;
+the shared launcher generates its own entry from the consumer configuration.
