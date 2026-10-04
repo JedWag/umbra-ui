@@ -41,7 +41,7 @@ export function AppShell({
             <ThemeToggle />
           </div>
         </header>
-        <main className="min-h-0 flex-1 overflow-y-auto bg-muted/40 p-6 [scrollbar-gutter:stable]">{children}</main>
+        <main className="min-h-0 flex-1 overflow-y-auto bg-muted/40 p-6 [scrollbar-gutter:stable] [&::-webkit-scrollbar-track]:bg-transparent">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )
