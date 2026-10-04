@@ -27,8 +27,8 @@ export function AppShell({
   return (
     <SidebarProvider>
       {sidebar}
-      <SidebarInset>
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 md:rounded-tl-xl md:rounded-tr-xl">
+      <SidebarInset className="h-svh overflow-hidden md:h-[calc(100svh-1rem)]">
+        <header className="flex h-14 shrink-0 items-center justify-between border-b bg-background px-4 md:rounded-tl-xl md:rounded-tr-xl">
           <div className="flex items-center gap-1 lg:gap-2">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mx-2 h-4 data-[orientation=vertical]:self-auto" />
@@ -41,7 +41,7 @@ export function AppShell({
             <ThemeToggle />
           </div>
         </header>
-        <main className="flex-1 bg-muted/40 p-6">{children}</main>
+        <main className="min-h-0 flex-1 overflow-y-auto bg-muted/40 p-6 [scrollbar-gutter:stable]">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )
