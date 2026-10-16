@@ -17,25 +17,17 @@
   --chevron-edge: var(--status-green-bg);
 }
 
-/* Both color sections use the same full-size native border geometry.
-   Clip at the divider so translucent colors never overlap. */
-.success-drop-frame::before,
-.success-drop-frame::after {
+.success-drop-frame::before {
   content: "";
   position: absolute;
   inset: -1px;
-  border: 1px solid var(--save-edge);
+  padding: 1px;
   border-radius: inherit;
   pointer-events: none;
-}
-
-.success-drop-frame::before {
-  clip-path: inset(0 calc(2.5rem + 1px) 0 0);
-}
-
-.success-drop-frame::after {
-  border-color: var(--chevron-edge);
-  clip-path: inset(0 0 0 calc(100% - 2.5rem - 1px));
+  background: linear-gradient(to left, var(--chevron-edge) calc(2.5rem + 1px), var(--save-edge) calc(2.5rem + 1px));
+  /* Cut out the center so translucent edge colors cannot tint the fill. */
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .success-drop-frame[data-menu-open] {
@@ -43,8 +35,7 @@
   border-bottom-width: 0;
 }
 
-.success-drop-frame[data-menu-open]::before,
-.success-drop-frame[data-menu-open]::after {
+.success-drop-frame[data-menu-open]::before {
   bottom: 0;
-  border-bottom-width: 0;
+  padding-bottom: 0;
 }
