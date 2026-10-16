@@ -31,6 +31,7 @@
 }
 
 .success-drop-frame[data-menu-open] {
+  --save-edge: var(--status-green-border);
   border-bottom-width: 0;
 }
 
