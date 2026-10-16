@@ -64,7 +64,7 @@ function SuccessDropButton({
         data-save-hovered={saveHovered || undefined}
         data-chevron-hovered={(!merged && chevronHovered) || undefined}
         className={cn(
-          "success-drop-frame relative h-9 rounded-md border border-transparent",
+          "success-drop-frame relative h-9 rounded-md border-2 border-transparent",
           menuOpen && "rounded-b-none"
         )}
       >
@@ -97,7 +97,7 @@ function SuccessDropButton({
           onClick={() => setMenuOpen(true)}
           className={cn(
             buttonVariants({ size: "default" }),
-            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-transparent hover:text-[var(--status-green-bg)]",
+            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l-2 border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-transparent hover:text-[var(--status-green-bg)]",
             merged && "opacity-0",
             menuOpen && "pointer-events-none"
           )}
@@ -106,7 +106,7 @@ function SuccessDropButton({
         </ButtonPrimitive>
       </div>
       {menuOpen && (
-        <div id={menuId} className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-md border border-t-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)]">
+        <div id={menuId} className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-md border-2 border-t-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)]">
           {items.map((item) => (
             <Button
               key={item.label}

@@ -20,11 +20,11 @@
 .success-drop-frame::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  padding: 1px;
+  inset: -2px;
+  padding: 2px;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(to left, var(--chevron-edge) calc(2.5rem + 1px), var(--save-edge) calc(2.5rem + 1px));
+  background: linear-gradient(to left, var(--chevron-edge) calc(2.5rem + 2px), var(--save-edge) calc(2.5rem + 2px));
   /* Cut out the center so translucent edge colors cannot tint the fill. */
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
