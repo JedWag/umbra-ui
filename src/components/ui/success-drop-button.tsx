@@ -106,7 +106,7 @@ function SuccessDropButton({
         </ButtonPrimitive>
       </div>
       {menuOpen && (
-        <div id={menuId} className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-md border border-t-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)]">
+        <div id={menuId} className="absolute inset-x-0 top-full z-50">
           {items.map((item) => (
             <Button
               key={item.label}
@@ -116,7 +116,7 @@ function SuccessDropButton({
                 item.onClick()
                 setMenuOpen(false)
               }}
-              className="h-8 w-full justify-start rounded-none pl-4 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)] dark:hover:bg-[var(--status-green-border)]"
+              className="h-8 w-full justify-start rounded-none border-x border-[var(--status-green-border)] bg-[var(--status-green-bg)] pl-4 text-[var(--status-green-border)] last:h-[calc(2rem+1px)] last:rounded-b-md last:border-b hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)] dark:hover:bg-[var(--status-green-border)]"
             >
               {item.label}
             </Button>
