@@ -28,6 +28,7 @@ function SuccessDropButton({
   const groupRef = React.useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [saveHovered, setSaveHovered] = React.useState(false)
+  const [chevronHovered, setChevronHovered] = React.useState(false)
   const merged = menuOpen || saveHovered
 
   React.useEffect(() => {
@@ -59,9 +60,10 @@ function SuccessDropButton({
     <div ref={groupRef} className="relative">
       <div
         onPointerLeave={() => setSaveHovered(false)}
+        data-save-hovered={saveHovered || undefined}
+        data-chevron-hovered={(!merged && chevronHovered) || undefined}
         className={cn(
-          "relative h-9 rounded-md border border-[var(--status-green-border)] bg-[var(--status-green-bg)] transition-colors",
-          saveHovered && "border-[var(--status-green-bg)] bg-[var(--status-green-border)]",
+          "success-drop-frame relative h-9 rounded-md border border-transparent",
           menuOpen && "rounded-b-none"
         )}
       >
@@ -89,10 +91,12 @@ function SuccessDropButton({
           aria-controls={menuOpen ? menuId : undefined}
           aria-hidden={menuOpen || undefined}
           tabIndex={menuOpen ? -1 : 0}
+          onPointerEnter={() => setChevronHovered(true)}
+          onPointerLeave={() => setChevronHovered(false)}
           onClick={() => setMenuOpen(true)}
           className={cn(
             buttonVariants({ size: "default" }),
-            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
+            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-transparent hover:text-[var(--status-green-bg)]",
             merged && "opacity-0",
             menuOpen && "pointer-events-none"
           )}
