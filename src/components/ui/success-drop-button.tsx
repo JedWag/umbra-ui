@@ -90,7 +90,7 @@ function SuccessDropButton({
           onClick={() => setMenuOpen(true)}
           className={cn(
             buttonVariants({ size: "default" }),
-            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-[var(--status-green-bg)] px-0 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
+            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
             merged && "pointer-events-none opacity-0"
           )}
         >
