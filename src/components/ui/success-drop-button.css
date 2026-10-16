@@ -29,3 +29,12 @@
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
+
+.success-drop-frame[data-menu-open] {
+  border-bottom-width: 0;
+}
+
+.success-drop-frame[data-menu-open]::before {
+  bottom: 0;
+  padding-bottom: 0;
+}

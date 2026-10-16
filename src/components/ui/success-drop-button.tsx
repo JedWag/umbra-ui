@@ -60,6 +60,7 @@ function SuccessDropButton({
     <div ref={groupRef} className="relative">
       <div
         onPointerLeave={() => setSaveHovered(false)}
+        data-menu-open={menuOpen || undefined}
         data-save-hovered={saveHovered || undefined}
         data-chevron-hovered={(!merged && chevronHovered) || undefined}
         className={cn(
