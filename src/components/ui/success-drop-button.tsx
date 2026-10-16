@@ -60,7 +60,8 @@ function SuccessDropButton({
       <div
         onPointerLeave={() => setSaveHovered(false)}
         className={cn(
-          "relative h-9 rounded-md border border-[var(--status-green-border)] bg-[var(--status-green-bg)]",
+          "relative h-9 rounded-md border border-[var(--status-green-border)] bg-[var(--status-green-bg)] transition-colors",
+          saveHovered && "border-[var(--status-green-bg)] bg-[var(--status-green-border)]",
           menuOpen && "rounded-b-none"
         )}
       >
@@ -68,13 +69,14 @@ function SuccessDropButton({
           data-slot="button"
           type="button"
           onPointerEnter={() => setSaveHovered(true)}
+          onPointerLeave={() => setSaveHovered(false)}
           onClick={() => {
             setMenuOpen(false)
             onClick()
           }}
           className={cn(
             buttonVariants({ size: "default" }),
-            "h-full w-full justify-start rounded-[inherit] bg-transparent pr-[77px] text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]"
+            "h-full w-full justify-start rounded-[inherit] bg-transparent pr-[77px] text-[var(--status-green-border)] hover:bg-transparent hover:text-[var(--status-green-bg)]"
           )}
         >
           {children}
@@ -85,13 +87,14 @@ function SuccessDropButton({
           aria-label="More save options"
           aria-expanded={menuOpen}
           aria-controls={menuOpen ? menuId : undefined}
-          aria-hidden={merged || undefined}
-          tabIndex={merged ? -1 : 0}
+          aria-hidden={menuOpen || undefined}
+          tabIndex={menuOpen ? -1 : 0}
           onClick={() => setMenuOpen(true)}
           className={cn(
             buttonVariants({ size: "default" }),
             "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-transparent px-0 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
-            merged && "pointer-events-none opacity-0"
+            merged && "opacity-0",
+            menuOpen && "pointer-events-none"
           )}
         >
           <ChevronDown className="size-4" />
