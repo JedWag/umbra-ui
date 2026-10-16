@@ -76,7 +76,7 @@ function WarningButton({ className, size = "default", children = "Cancel", ...pr
       data-slot="button"
       className={cn(
         buttonVariants({ size }),
-        "border-2 border-[var(--status-orange-border)] bg-[var(--status-orange-bg)] text-[var(--status-orange-border)] hover:border-[var(--status-orange-bg)] hover:bg-[var(--status-orange-border)] hover:text-[var(--status-orange-bg)]",
+        "border border-[var(--status-orange-border)] bg-[var(--status-orange-bg)] text-[var(--status-orange-border)] hover:border-[var(--status-orange-bg)] hover:bg-[var(--status-orange-border)] hover:text-[var(--status-orange-bg)]",
         className
       )}
       {...props}
