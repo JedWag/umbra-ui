@@ -116,7 +116,7 @@ function SuccessDropButton({
                 item.onClick()
                 setMenuOpen(false)
               }}
-              className="h-8 w-full justify-start rounded-none pl-4 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]"
+              className="h-8 w-full justify-start rounded-none pl-4 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)] dark:hover:bg-[var(--status-green-border)]"
             >
               {item.label}
             </Button>
