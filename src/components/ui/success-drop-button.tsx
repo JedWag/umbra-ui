@@ -24,38 +24,57 @@ function SuccessDropButton({
   children?: React.ReactNode
   items: SuccessDropItem[]
 }) {
+  const menuId = React.useId()
   const groupRef = React.useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = React.useState(false)
+  const [saveHovered, setSaveHovered] = React.useState(false)
+  const merged = menuOpen || saveHovered
 
   React.useEffect(() => {
     if (!menuOpen) return
-    function handlePointerDown(e: PointerEvent) {
-      if (!groupRef.current?.contains(e.target as Node)) setMenuOpen(false)
+    // Consume the outside gesture before the enclosing dialog or another control sees it.
+    function handleOutside(e: PointerEvent | MouseEvent) {
+      if (groupRef.current?.contains(e.target as Node)) return
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      if (e.type === "click") setMenuOpen(false)
     }
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false)
+      if (e.key !== "Escape") return
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      setMenuOpen(false)
     }
-    document.addEventListener("pointerdown", handlePointerDown)
-    document.addEventListener("keydown", handleKeyDown)
+    window.addEventListener("pointerdown", handleOutside, true)
+    window.addEventListener("click", handleOutside, true)
+    window.addEventListener("keydown", handleKeyDown, true)
     return () => {
-      document.removeEventListener("pointerdown", handlePointerDown)
-      document.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener("pointerdown", handleOutside, true)
+      window.removeEventListener("click", handleOutside, true)
+      window.removeEventListener("keydown", handleKeyDown, true)
     }
   }, [menuOpen])
 
   return (
     <div ref={groupRef} className="relative">
-      <div className="flex">
+      <div
+        onPointerLeave={() => setSaveHovered(false)}
+        className={cn(
+          "relative h-9 rounded-md border border-[var(--status-green-border)] bg-[var(--status-green-bg)]",
+          menuOpen && "rounded-b-none"
+        )}
+      >
         <ButtonPrimitive
           data-slot="button"
           type="button"
-          onClick={onClick}
+          onPointerEnter={() => setSaveHovered(true)}
+          onClick={() => {
+            setMenuOpen(false)
+            onClick()
+          }}
           className={cn(
             buttonVariants({ size: "default" }),
-            "rounded-tr-none rounded-br-none border border-[var(--status-green-border)] bg-[var(--status-green-bg)] pr-[37px] text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
-            menuOpen
-              ? "rounded-bl-none border-r-0 border-b-0 shadow-none"
-              : "border-r border-r-[var(--status-green-border)]"
+            "h-full w-full justify-start rounded-[inherit] bg-transparent pr-[77px] text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]"
           )}
         >
           {children}
@@ -64,18 +83,22 @@ function SuccessDropButton({
           data-slot="button"
           type="button"
           aria-label="More save options"
-          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls={menuOpen ? menuId : undefined}
+          aria-hidden={merged || undefined}
+          tabIndex={merged ? -1 : 0}
+          onClick={() => setMenuOpen(true)}
           className={cn(
             buttonVariants({ size: "default" }),
-            "rounded-tl-none rounded-bl-none border border-l-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)] px-1.5 text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
-            menuOpen && "rounded-br-none border-b-0 shadow-none"
+            "absolute inset-y-0 right-0 h-full w-10 rounded-none rounded-r-[inherit] border-l border-[var(--status-green-border)] bg-[var(--status-green-bg)] px-0 text-[var(--status-green-border)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
+            merged && "pointer-events-none opacity-0"
           )}
         >
           <ChevronDown className="size-4" />
         </ButtonPrimitive>
       </div>
       {menuOpen && (
-        <div className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-md border border-t-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)]">
+        <div id={menuId} className="absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-md border border-t-0 border-[var(--status-green-border)] bg-[var(--status-green-bg)]">
           {items.map((item) => (
             <Button
               key={item.label}
