@@ -79,7 +79,7 @@ function SuccessDropButton({
           }}
           className={cn(
             buttonVariants({ size: "default" }),
-            "h-full w-full justify-start rounded-[inherit] bg-transparent pr-[77px] text-[var(--status-green-border)] hover:bg-transparent hover:text-[var(--status-green-bg)]"
+            "relative h-full w-full justify-start rounded-[inherit] bg-transparent pr-[77px] text-[var(--status-green-border)] hover:bg-transparent hover:text-[var(--status-green-bg)]"
           )}
         >
           {children}

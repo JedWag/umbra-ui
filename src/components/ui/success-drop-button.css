@@ -4,7 +4,6 @@
   --save-edge: var(--status-green-border);
   --chevron-fill: var(--save-fill);
   --chevron-edge: var(--save-edge);
-  background: linear-gradient(to left, var(--chevron-fill) 2.5rem, var(--save-fill) 2.5rem) padding-box;
 }
 
 .success-drop-frame[data-save-hovered] {
@@ -17,19 +16,31 @@
   --chevron-edge: var(--status-green-bg);
 }
 
-.success-drop-frame::before {
+/* Each section paints a native border and background together, like Cancel.
+   Both use the full frame's geometry; the clips only divide their colors. */
+.success-drop-frame::before,
+.success-drop-frame::after {
   content: "";
   position: absolute;
   inset: -1px;
-  padding: 1px;
+  border: 1px solid var(--save-edge);
   border-radius: inherit;
+  background: var(--save-fill);
   pointer-events: none;
-  background: linear-gradient(to left, var(--chevron-edge) calc(2.5rem + 1px), var(--save-edge) calc(2.5rem + 1px));
-  /* Cut out the center so translucent edge colors cannot tint the fill. */
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  /* The background already clips the outer curve; do not soften it twice. */
-  mask-clip: content-box, no-clip;
-  mask-composite: exclude;
+}
+
+.success-drop-frame::before {
+  clip-path: inset(0 calc(2.5rem + 1px) 0 0);
+}
+
+.success-drop-frame::after {
+  border-color: var(--chevron-edge);
+  background: var(--chevron-fill);
+  clip-path: inset(0 0 0 calc(100% - 2.5rem - 1px));
+}
+
+.success-drop-frame > button {
+  z-index: 1;
 }
 
 .success-drop-frame[data-menu-open] {
@@ -37,7 +48,8 @@
   border-bottom-width: 0;
 }
 
-.success-drop-frame[data-menu-open]::before {
+.success-drop-frame[data-menu-open]::before,
+.success-drop-frame[data-menu-open]::after {
   bottom: 0;
-  padding-bottom: 0;
+  border-bottom-width: 0;
 }
