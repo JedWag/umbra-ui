@@ -2,12 +2,12 @@
 
 ## Conventions
 
-- **Use `gush` before yielding** — if you changed the repository during the current turn, read and follow the current `gush` skill before ending the turn and returning control to the user.
+- **Use `gush` before yielding** — if you changed the repository during the current turn, follow the `gush` skill before ending the turn and returning control to the user, including the user's existing changes.
 - **Talk before planning** — for any non-trivial problem, have a back-and-forth conversation to work through the solution together before writing a plan. Do not rush to plan mode. The user needs to be able to bounce ideas and push back before anything is locked in.
 - **Act only when told** — do not make changes mid-conversation based on observations or implications. Finish the discussion, then act when the user says go.
 - **Use the simplest command form** — never reach for a more complex variant (e.g. `git -C <path>`) when a simpler form (e.g. `git add`) already works and is covered by permissions. The working directory is already set; use it.
-- **Cheap model for simple subagents** — when spawning a subagent for exploration, file reading, file search, or other simple lookup work, always use `model: "gpt-5.6-terra"` with low reasoning effort. Only use the default/heavier model when the subagent must do real reasoning, design, or multi-step implementation.
 - **Number suggestions** — number top-level suggestions, options, and questions; use letters for nested items so each can be referenced without retyping it.
+- **Cheap model for simple subagents** — when spawning a subagent for exploration, file reading, file search, or other simple lookup work, always use the cheap model for your agent: Claude `model: "haiku"`, Codex `model: "gpt-5.6-terra"` with low reasoning effort, Gemini `flash_lite`. Only use the default/heavier model when the subagent must do real reasoning, design, or multi-step implementation.
 
 ---
 
@@ -46,7 +46,7 @@ When editing existing code:
 - If you notice unrelated dead code, mention it - don't delete it.
 
 When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
+- Remove imports/variables/functions/empty dirs that YOUR changes made unused.
 - Don't remove pre-existing dead code unless asked.
 
 The test: Every changed line should trace directly to the user's request.
