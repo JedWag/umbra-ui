@@ -81,3 +81,48 @@ Actual macOS operation must be verified by running the consumer on a Mac.
 
 `templates/app.desktop` remains available for manually managed Linux entries;
 the shared launcher generates its own entry from the consumer configuration.
+
+### Linux dock identity for Electron consumers
+
+QB and Guzzler use consumer-owned Electron launchers; the shared
+`launcher/launch.py` above still launches Chrome. When setting up an Electron
+consumer, configure its Linux desktop identity explicitly before Electron's
+`ready` event:
+
+```js
+app.setName(config.name);
+if (process.platform === 'linux') {
+  app.setDesktopName(`${config.slug}.desktop`);
+}
+```
+
+Keep these values aligned, using the consumer's existing slug:
+
+| Location | Value |
+| --- | --- |
+| Installed desktop entry | `~/.local/share/applications/<slug>.desktop` |
+| Electron `app.setDesktopName` | `<slug>.desktop` |
+| Desktop entry `StartupWMClass` | `<slug>` |
+| Desktop entry `Name` | Consumer display name |
+| Desktop entry `Icon` | Consumer icon path |
+
+Generate `StartupWMClass` from the same configuration rather than hardcoding a
+second identity:
+
+```python
+f"StartupWMClass={SLUG}\n"
+```
+
+`app.setName()` alone sets Electron's internal name; it does not establish the
+Linux window identity. `app.setDesktopName()` supplies the Wayland `app_id` and
+X11 `WM_CLASS` used for window grouping. Without the matching identity, GNOME
+can show a separate generic Electron icon instead of attaching the running
+indicator to the consumer's pinned launcher.
+
+After changing identity, regenerate the installed desktop entry and fully quit
+and reopen the consumer; frontend hot reload does not update Electron's identity.
+Verify that launching the pinned icon produces one app group with the correct
+name and icon, and that its running indicator appears under that same icon.
+Keep a launcher regression check for the identity being set before readiness.
+
+Reference: [Electron Linux desktop identity](https://www.electronjs.org/docs/latest/api/app#appsetdesktopnamename-linux).

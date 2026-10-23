@@ -118,3 +118,8 @@ For Python/FastAPI + Vite apps on Linux and macOS, copy `templates/run.sh` and
 `templates/launcher.json` into the app root and fill in the app-specific values.
 The shell entry invokes the shared `launcher/launch.py` from the installed Umbra
 package. See [Development](docs/05-development.md#consumer-app-launcher) for setup.
+
+For Electron consumers such as QB and Guzzler, follow the
+[Linux dock identity requirements](docs/05-development.md#linux-dock-identity-for-electron-consumers)
+when creating the launcher. The `.desktop` filename, Electron desktop identity,
+and `StartupWMClass` must match so the running window belongs to the pinned app.
